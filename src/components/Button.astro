@@ -1,0 +1,38 @@
+---
+export interface Props {
+    props: {
+        style: string | null;
+        size: string | null;
+        text: string;
+    };
+}
+const { props } = Astro.props;
+---
+
+<button class={ `${props.style} ${props.size}` }>
+    <p class="button" id="noselect">{ props.text }</p>
+</button>
+
+<style>
+button{
+    cursor: pointer;
+    margin: 0;
+    padding: 0px 16px;
+    height: 40px;
+    min-height: 40px;
+    border-radius: 999px;
+    font: var(--font-button);
+    color: var(--color-text);
+    background: #ffffff0d;
+    box-sizing: border-box;
+    border: 1px solid;
+    border-color: var(--color-border);
+    transition: 0.4s border-color ease, 0.4s color ease;
+}
+button:hover{
+    border-color: var(--color-border-accent);
+}
+button:hover p{
+    color: var(--color-border-accent);
+}
+</style>
