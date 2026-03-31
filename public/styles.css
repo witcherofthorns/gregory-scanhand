@@ -2,15 +2,19 @@
     --color-yellow: #e4c278d9;
     --color-white: #e9e8e4;
     --color-gray: #cfcfcdb8;
-    --color-gray-dark: #ffffff1f;
+    --color-gray-light: #ffffff1f;
+    --color-gray-dark: #ffffff0d;
+    --color-gray-dark-solid: #111111;
 
-    --color-border: var(--color-gray-dark);
+    --color-border: var(--color-gray-light);
     --color-border-accent: var(--color-yellow);
     --color-text-accent: var(--color-yellow);
     --color-text: var(--color-white);
     --color-text-gray: var(--color-gray);
+    --color-surface-primary: var(--color-gray-dark);
+    --color-surface-primary-solid: var(--color-gray-dark-solid);
 
-    --shadow: 0 22px 60px #0000008c;
+    --gradinet-accent: linear-gradient(348deg, rgba(228, 194, 120, 0.45) 0%, rgba(48, 48, 48, 0.45) 70%);
 
     --font-family-inter: Inter, sans-serif;
     --font-family-montserrat: "Montserrat", sans-serif;
@@ -20,6 +24,10 @@
 html, body {
 	margin: 0;
 	width: 100%;
+}
+
+html{
+    background-color: black;
 }
 
 body{
@@ -43,12 +51,17 @@ a.button{
     box-sizing: border-box;
 }
 
-p, a, li, summary {
+p, a, li, span, summary {
     font-size: 14px;
     font-family: var(--font-family-inter);
     margin: 0;
     font-size: 16px;
     line-height: 1.55;
+}
+
+p.accent, h1.accent, h2.accent,
+h3.accent, h4.accent, h5.accent{
+    color: var(--color-text-accent);
 }
 
 h1{
@@ -138,6 +151,52 @@ p.gray{
     flex: 1;
 }
 
+.panel-padding{
+    padding: 24px 26px;
+}
+
+.panel-padding.small{
+    padding: 20px;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.gap-6{
+    gap: 6px;
+}
+
+.gap-8{
+    gap: 8px;
+}
+
+.gap-12{
+    gap: 12px;
+}
+
+.gap-16{
+    gap: 16px;
+}
+
+.gap-20{
+    gap: 20px;
+}
+
+.gap-26{
+    gap: 26px;
+}
+
+.gap-32{
+    gap: 32px;
+}
+
 #noselect {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -162,11 +221,38 @@ p.gray{
     width: 1120px;
 }
 
-@media screen and (max-width: 1120px) {
+.wrap-to-row{
+    display: flex;
+    flex-direction: column;
+}
+.wrap-to-col{
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 1120px){
+    .wrap{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 960px){
     .wrap{
         width: 100%;
         padding-right: 20px;
         padding-left: 20px;
         box-sizing: border-box;
+    }
+    .wrap-to-col{
+        flex-direction: column;
+    }
+    .wrap-to-row{
+        flex-direction: row;
+    }
+}
+
+@media screen and (max-width: 640px){
+    .panel-padding{
+        padding: 20px 16px;
     }
 }

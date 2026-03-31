@@ -1,0 +1,161 @@
+---
+const { content, error } = Astro.props;
+---
+
+<div class="prediction-container">
+    {
+        error ? (
+            <div class="error-message">
+                <div class="error-icon">⚠️</div>
+                <p class="error-text">{error}</p>
+            </div>
+        ) : content ? (
+            <div class="result-content">
+                <div class="result-header">
+                    <span class="result-icon">🔮</span>
+                    <h4>Ваше предсказание</h4>
+                </div>
+                <div class="result-text">
+                    <p>{content}</p>
+                </div>
+                <div class="result-footer">
+                    <button class="share-btn" data-share-result>
+                        📤 Поделиться
+                    </button>
+                </div>
+            </div>
+        ) : (
+            <div class="empty-state">
+                <p>✨ Здесь появится ваше предсказание ✨</p>
+            </div>
+        )
+    }
+</div>
+
+<style>
+    .prediction-container {
+        width: 100%;
+    }
+
+    .result-content {
+        animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .result-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #e5e7eb;
+    }
+
+    .result-icon {
+        font-size: 24px;
+    }
+
+    .result-header h4 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: #1f2937;
+    }
+
+    .result-text {
+        line-height: 1.7;
+        font-size: 16px;
+        color: #374151;
+        background: #f9fafb;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    .result-text p {
+        margin: 0;
+        white-space: pre-wrap;
+    }
+
+    .result-footer {
+        text-align: center;
+    }
+
+    .share-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .share-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    .error-message {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-radius: 12px;
+        padding: 16px;
+        color: #dc2626;
+    }
+
+    .error-icon {
+        font-size: 24px;
+    }
+
+    .error-text {
+        margin: 0;
+        flex: 1;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #9ca3af;
+    }
+</style>
+
+<script>
+    // Функционал для кнопки "Поделиться"
+    const shareBtn = document.querySelector("[data-share-result]");
+    if (shareBtn) {
+        shareBtn.addEventListener("click", async () => {
+            const resultText =
+                document.querySelector(".result-text p")?.textContent;
+            if (resultText && navigator.share) {
+                try {
+                    await navigator.share({
+                        title: "Моё предсказание хиромантии",
+                        text: resultText,
+                    });
+                } catch (err) {
+                    console.log("Error sharing:", err);
+                }
+            } else if (resultText) {
+                // Fallback: копируем в буфер обмена
+                await navigator.clipboard.writeText(resultText);
+                alert("Предсказание скопировано в буфер обмена!");
+            }
+        });
+    }
+</script>

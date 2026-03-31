@@ -1,16 +1,18 @@
 ---
-export interface Props {
-    props: {
-        style: string | null;
-        size: string | null;
-        text: string;
-    };
+const { id, text, icon, style, size, flex, disabled } = Astro.props;
+
+const styleDefault = () => {
+    return !style ? 'primary' : '';
 }
-const { props } = Astro.props;
+
+const sizeDefault = () => {
+    return !size ? 'medium' : '';
+}
 ---
 
-<button class={ `${props.style} ${props.size}` }>
-    <p class="button" id="noselect">{ props.text }</p>
+<button id={id} disabled={disabled} class={ `${styleDefault()} ${sizeDefault()} ${flex ? 'flex' : null} ${(icon && !text) ? 'icon' : ''}` }>
+    { icon && (<img class="icon" src={icon} />) }
+    { text && (<p class="button" id="noselect">{text}</p>) }
 </button>
 
 <style>
@@ -20,19 +22,42 @@ button{
     padding: 0px 16px;
     height: 40px;
     min-height: 40px;
-    border-radius: 999px;
+    border-radius: 32px;
     font: var(--font-button);
     color: var(--color-text);
-    background: #ffffff0d;
+    background: var(--color-surface-primary);
     box-sizing: border-box;
     border: 1px solid;
     border-color: var(--color-border);
     transition: 0.4s border-color ease, 0.4s color ease;
 }
-button:hover{
+button:disabled{
+    opacity: 0.2;
+}
+button:hover:not(:disabled){
     border-color: var(--color-border-accent);
 }
 button:hover p{
     color: var(--color-border-accent);
+}
+button:has(img.icon){
+    display: flex;
+    gap: 16px;
+    flex-direction: row;
+    align-items: center;
+}
+button .icon{
+    width: 18px;
+    height: 18px;
+}
+button.icon{
+    width: 40px;
+    padding: 0;
+}
+button.icon .icon{
+    margin: auto;
+}
+button.flex{
+    flex: 1;
 }
 </style>

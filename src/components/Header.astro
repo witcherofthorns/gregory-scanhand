@@ -1,16 +1,13 @@
 ---
 import { navigation } from "../data/navigation.js"
 import Button from "./Button.astro"
-import IconHand from "../icons/IconHand.astro"
-
-const button = { size:'medium', style:'primary' }
 ---
 
 <div class="header">
-    <div class="container wrap" id="noselect">
+    <div class="container wrap wrap-to-col" id="noselect">
         <div class="label">
-            <div class="logo">
-                <IconHand />
+            <div class="logo" id="noevents">
+                <img src="/icon-24.png" />
             </div>
             <div>
                 <p class="subtitle bold">ScanHand</p>
@@ -20,7 +17,7 @@ const button = { size:'medium', style:'primary' }
         <div class="buttons">
             {navigation.map((data) => (
                 <a class="button" href={data.path}>
-                    <Button props={{ size: button.size, style: button.style, text:data.name}} />
+                    <Button text={data.name} />
                 </a>
             ))}
         </div>
@@ -29,6 +26,11 @@ const button = { size:'medium', style:'primary' }
 
 <style>
 .header{
+    top: 0;
+    left: 0;
+    position: sticky;
+    overflow: hidden;
+    z-index: 1;
     backdrop-filter: blur(12px);
     background: rgba(0,0,0,.35);
     border-bottom: 1px solid var(--color-border);
@@ -58,9 +60,18 @@ const button = { size:'medium', style:'primary' }
     align-items: center;
     justify-content: center;
 }
+.header .label .logo img{
+    width: 24px;
+    height: 24px;
+}
 .header .buttons{
     display: inline-flex;
     flex-direction: row;
     gap: 8px;
+}
+@media (max-width: 720px){
+    .header .container{
+        align-items: start;
+    }
 }
 </style>
