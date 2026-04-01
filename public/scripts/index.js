@@ -211,6 +211,11 @@ async function makePrediction() {
         const response = await fetch("/api/predict", {
             method: "POST",
             body: formData,
+            headers: {
+                'Origin': window.location.origin,
+                'Referer': window.location.href,
+                'X-Requested-With': 'XMLHttpRequest'
+            }
         });
 
         const data = await response.json();

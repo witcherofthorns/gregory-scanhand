@@ -2,6 +2,29 @@ import type { APIRoute } from 'astro'
 import { getSecret } from 'astro:env/server'
 import { promtSystem } from '../../data/promt';
 
+function extractJSON(text:string) {
+    // Удаляем markdown код-блоки (```json ... ``` или просто ``` ... ```)
+    let cleaned = text.trim();
+    
+    // Паттерн для ```json ... ``` или ``` ... ```
+    const markdownPattern = /```(?:json)?\s*\n?([\s\S]*?)\n?```/;
+    const match = cleaned.match(markdownPattern);
+    
+    if (match) {
+        cleaned = match[1].trim();
+    }
+    
+    // Пробуем найти JSON объект в тексте
+    const jsonPattern = /\{[\s\S]*\}/;
+    const jsonMatch = cleaned.match(jsonPattern);
+    
+    if (jsonMatch) {
+        cleaned = jsonMatch[0];
+    }
+    
+    return cleaned;
+}
+
 export const POST: APIRoute = async ({ request }) => {
     try {
         // Получаем данные от клиента
@@ -10,7 +33,7 @@ export const POST: APIRoute = async ({ request }) => {
         const rightHand = formData.get('rightHand') as File;
         const theme = formData.get('theme') as string;
 
-        // OpenAI proxy url
+        // OpenAI переменные
         const openaiUrl = getSecret("SKANHAND_OPENAI_URL");
         const openaiToken = getSecret("SKANHAND_OPENAI_API_KEY");
 
@@ -100,7 +123,7 @@ export const POST: APIRoute = async ({ request }) => {
 
         // Финальный ответ
         return new Response(
-            result,
+            extractJSON(result),
             { status: 200, headers: { 'Content-Type': 'application/json' } }
         );
 
