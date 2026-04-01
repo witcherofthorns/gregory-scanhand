@@ -17,7 +17,7 @@ import Button from "./Button.astro"
         <div class="buttons">
             {navigation.map((data) => (
                 <a class="button" href={data.path}>
-                    <Button text={data.name} />
+                    <Button text={data.name} disabled={!data.active} />
                 </a>
             ))}
         </div>

@@ -116,8 +116,8 @@ export const POST: APIRoute = async ({ request }) => {
 
 // Вспомогательная функция для конвертации File в base64
 async function fileToBase64(file: File): Promise<string> {
-  const bytes = await file.arrayBuffer();
-  const buffer = Buffer.from(bytes);
-  const base64 = buffer.toString('base64');
-  return `data:${file.type};base64,${base64}`;
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const base64 = buffer.toString('base64');
+    return `data:${file.type};base64,${base64}`;
 }
