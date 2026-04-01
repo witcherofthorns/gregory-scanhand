@@ -1,9 +1,7 @@
-// Состояние приложения
 let leftHandFile = null;
 let rightHandFile = null;
 let selectedTheme = "general";
 
-// DOM элементы
 const leftInput = document.getElementById("leftHandInput");
 const rightInput = document.getElementById("rightHandInput");
 const leftPreview = document.getElementById("leftPreview");
@@ -14,26 +12,22 @@ const loadingContainer = document.getElementById("loadingContainer");
 const resultContainer = document.getElementById("resultContainer");
 const predictionContent = document.getElementById("predictionContent");
 
-// Функции для управления модальным окном
 function openModal() {
-    console.log("📱 Открываем модальное окно");
-    if (modal) {
+    if(modal){
         modal.classList.remove("hidden");
         document.body.style.overflow = "hidden";
     }
 }
 
 function closeModal() {
-    console.log("📱 Закрываем модальное окно");
-    if (modal) {
+    if(modal){
         modal.classList.add("hidden");
         document.body.style.overflow = "";
     }
 }
 
 function compressorImage(file, options = {}) {
-    return new Promise(async (resolve, reject) => {
-        const Compressor = (await import('compressorjs')).default;
+    return new Promise((resolve, reject) => {
         new Compressor(file, {
             ...options,
             success(result) {
@@ -201,8 +195,6 @@ function dispalyError(error){
 
 // Функция гадания
 async function makePrediction() {
-    console.log("🔮 Начинаем гадание");
-
     // Показываем загрузку, скрываем результат
     loadingContainer.classList.remove("hidden");
     resultContainer.classList.add("hidden");
