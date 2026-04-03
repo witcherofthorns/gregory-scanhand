@@ -1,7 +1,5 @@
-# Astro Starter Kit: Basics
-```sh
-npm create astro@latest -- --template basics
-```
+# Scanhand
+AI palmist app for getting predictions
 
 ## 🧞 Commands
 All commands are run from the root of the project, from a terminal:
@@ -19,4 +17,5 @@ All commands are run from the root of the project, from a terminal:
 ```bash
 export SKANHAND_OPENAI_URL="http://..."
 export SKANHAND_OPENAI_API_KEY="your-openai-token"
+export SKANHAND_BLOG_URL="your-google-sheet-url"
 ```

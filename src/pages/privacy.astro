@@ -1,5 +1,5 @@
 ---
-import { terms } from "../data/terms";
+import { privacy } from "../data/privacy";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 ---
@@ -9,11 +9,11 @@ import Header from "../components/Header.astro";
     <div class="policy-container wrap anim-fade-in">
         <div class="col gap-8 panel panel-padding">
             <div class="col gap-8">
-                <h2>Условия использования</h2>
+                <h2>Политика конфиденциальности</h2>
                 <p class="gray">scanhand.ru</p>
             </div>
             {
-                terms.map((data) => (
+                privacy.map((data) => (
                     <div class="border" />
                     <div class="col gap-12">
                         <h4>{ data.title }</h4>

@@ -2,11 +2,11 @@
 const { id, text, icon, style, size, flex, disabled } = Astro.props;
 
 const styleDefault = () => {
-    return !style ? 'primary' : '';
+    return !style ? 'primary' : style;
 }
 
 const sizeDefault = () => {
-    return !size ? 'medium' : '';
+    return !size ? 'medium' : size;
 }
 ---
 
@@ -19,10 +19,7 @@ const sizeDefault = () => {
 button{
     cursor: pointer;
     margin: 0;
-    padding: 0px 16px;
-    height: 40px;
-    min-height: 40px;
-    border-radius: 32px;
+    border-radius: 36px;
     font: var(--font-button);
     color: var(--color-text);
     background: var(--color-surface-primary);
@@ -30,6 +27,16 @@ button{
     border: 1px solid;
     border-color: var(--color-border);
     transition: 0.4s border-color ease, 0.4s color ease;
+}
+button.medium{
+    height: 40px;
+    min-height: 40px;
+    padding: 0px 16px;
+}
+button.large{
+    height: 50px;
+    min-height: 50px;
+    padding: 0px 20px;
 }
 button:disabled{
     cursor: default;

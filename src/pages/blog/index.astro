@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Post from "../../components/Post.astro"
+
+const baseUrl = import.meta.env.DEV ? "http://localhost:4321" : import.meta.env.SITE;
+const response = await fetch(`${baseUrl}/api/blog?source=blog&skip=0&limit=10`);
+const data = await response.json();
+const posts = data;
+---
+
+<Layout>
+    <Header />
+    <div class="blog-container wrap anim-fade-in">
+    {
+        posts.map((data:any) =>
+            <Post link={`/blog/${data.rowIndex}`} title={data.title} date={data.date} />
+        )
+    }
+    </div>
+</Layout>
+
+<style>
+.blog-container{
+	gap: 20px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+</style>

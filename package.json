@@ -17,6 +17,7 @@
   "dependencies": {
     "@astrojs/node": "^10.0.4",
     "astro": "^6.0.8",
-    "compressorjs": "^1.2.1"
+    "compressorjs": "^1.2.1",
+    "markdown-it": "^14.1.1"
   }
 }

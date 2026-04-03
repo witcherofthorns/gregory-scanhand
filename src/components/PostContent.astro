@@ -1,0 +1,64 @@
+---
+import markdownit from 'markdown-it'
+
+const { body } = Astro.props;
+
+const md = markdownit()
+const result = md.render(body);
+---
+
+<article class="blog-post-conent" set:html={result} />
+
+<style is:global>
+.blog-post-conent{
+}
+.blog-post-conent h1{
+    font-size: 40px;
+    line-height: 1.27;
+    font-weight: 900;
+    margin: 36px 0px;
+}
+.blog-post-conent h2{
+    font-size: 36px;
+    line-height: 1.24;
+    font-weight: 800;
+    margin-top: 64px;
+    margin-bottom: 32px;
+}
+.blog-post-conent h3{
+    font-size: 28px;
+    line-height: 1.20;
+    font-weight: 600;
+    margin-top: 52px;
+    margin-bottom: 26px;
+}
+.blog-post-conent h4{
+    font-size: 22px;
+    line-height: 1.18;
+    font-weight: 600;
+    margin-top: 52px;
+    margin-bottom: 26px;
+}
+.blog-post-conent h5{
+    font-size: 18px;
+    line-height: 1.16;
+    font-weight: 600;
+    margin-top: 52px;
+    margin-bottom: 26px;
+}
+.blog-post-conent p{
+    margin-top: 12px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    line-height: 1.8;
+}
+.blog-post-conent img{
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+}
+.blog-post-conent ul li{
+    margin-bottom: 14px;
+}
+</style>

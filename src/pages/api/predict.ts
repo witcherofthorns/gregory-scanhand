@@ -10,7 +10,7 @@ function extractJSON(text:string) {
     const markdownPattern = /```(?:json)?\s*\n?([\s\S]*?)\n?```/;
     const match = cleaned.match(markdownPattern);
     
-    if (match) {
+    if(match){
         cleaned = match[1].trim();
     }
     
@@ -18,7 +18,7 @@ function extractJSON(text:string) {
     const jsonPattern = /\{[\s\S]*\}/;
     const jsonMatch = cleaned.match(jsonPattern);
     
-    if (jsonMatch) {
+    if(jsonMatch){
         cleaned = jsonMatch[0];
     }
     
@@ -45,14 +45,14 @@ export const POST: APIRoute = async ({ request }) => {
             );
         }
 
-        if (!leftHand || !rightHand) {
+        if(!leftHand || !rightHand){
             return new Response(
                 JSON.stringify({ error: 'Пожалуйста, загрузите обе фотографии ладоней' }),
                 { status: 400 }
             );
         }
 
-        if (!theme) {
+        if(!theme){
             return new Response(
                 JSON.stringify({ error: 'Пожалуйста, выберите тему гадания' }),
                 { status: 400 }
@@ -106,7 +106,7 @@ export const POST: APIRoute = async ({ request }) => {
                     }
                 ],
                 temperature: 0.8,
-                max_tokens: 800
+                max_tokens: 1500
             })
         });
 

@@ -20,7 +20,7 @@ import LoadingSpinner from "../components/LoadingSpinner.astro";
         <div class="panel flex">
             <section class="col gap-26 panel-padding">
                 <div class="header-text">
-                    <h5>Загрузите фото ладоней</h5>
+                    <h4>Загрузите фото ладоней</h4>
                     <p class="gray">Форматы: JPG/PNG · до 10 МБ на файл</p>
                 </div>
 
@@ -29,7 +29,7 @@ import LoadingSpinner from "../components/LoadingSpinner.astro";
                         <section class="panel flex col gap-16 panel-padding small">
                             <p class="caption gray">Фото левой ладони</p>
                             <div class="row gap-6">
-                                <Button icon="/icons/camera.svg" text="Выбрать фото" flex id="leftUploadBtn" />
+                                <Button size="large" icon="/icons/camera.svg" text="Выбрать фото" flex id="leftUploadBtn" />
                             </div>
                             <div id="leftPreview" class="image-preview-container hidden" />
                             <input type="file" id="leftHandInput" accept="image/jpeg,image/png" class="hidden" capture />
@@ -37,7 +37,7 @@ import LoadingSpinner from "../components/LoadingSpinner.astro";
                         <section class="panel flex col gap-16 panel-padding small">
                             <p class="caption gray">Фото правой ладони</p>
                             <div class="row gap-6">
-                                <Button icon="/icons/camera.svg" text="Выбрать фото" flex id="rightUploadBtn" />
+                                <Button size="large" icon="/icons/camera.svg" text="Выбрать фото" flex id="rightUploadBtn" />
                             </div>
                             <div id="rightPreview" class="image-preview-container hidden" />
                             <input type="file" id="rightHandInput" accept="image/jpeg,image/png" class="hidden" capture />
@@ -48,7 +48,7 @@ import LoadingSpinner from "../components/LoadingSpinner.astro";
                         <Radio array={focused} id="themeSelector" />
                     </section>
                     <section class="panel col gap-16 panel-padding small flex">
-                        <Button text="Получить предсказание" flex primary id="predictBtn" disabled />
+                        <Button size="large" text="Получить предсказание" flex primary id="predictBtn" disabled />
                     </section>
                 </div>
             </section>
@@ -56,7 +56,7 @@ import LoadingSpinner from "../components/LoadingSpinner.astro";
         <div class="panel flex">
             <section class="panel-padding index-panel-faq">
                 <div class="header-text">
-                    <h5>Вопросы и ответы</h5>
+                    <h4>Вопросы и ответы</h4>
                     <p class="gray">
                         Коротко о том, как работает сервис и какие фото подойдут
                         для точного чтения
@@ -111,10 +111,6 @@ import LoadingSpinner from "../components/LoadingSpinner.astro";
     .index-container{
         flex-direction: column;
     }
-}
-
-.hidden {
-    display: none;
 }
 .image-preview-container {
     margin-top: 12px;
