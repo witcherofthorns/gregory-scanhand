@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Post from "../../components/Post.astro"
 
-const baseUrl = import.meta.env.DEV ? "http://localhost:4321" : import.meta.env.SITE;
+const baseUrl = Astro.url.origin;
 const response = await fetch(`${baseUrl}/api/blog?source=blog&skip=0&limit=10`);
 const data = await response.json();
 const posts = data;
