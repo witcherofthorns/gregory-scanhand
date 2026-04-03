@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getSecret } from 'astro:env/server'
 import { cache } from '../../services/cache';
 
-export const GET: APIRoute = async ({ url }) => {
+export const GET: APIRoute = async ({ url, request }) => {
     const sheet = url.searchParams.get('source');
     const skip = url.searchParams.get('skip') || '0';
     const limit = url.searchParams.get('limit') || '10';
@@ -54,7 +54,10 @@ export const GET: APIRoute = async ({ url }) => {
 
     try {
         // Делаем запрос
-        const response = await fetch(googleSheetsUrl.toString());
+        const response = await fetch(googleSheetsUrl.toString(),{
+            // Запрос долгий, дожидаемся 15 сек
+            signal: AbortSignal.timeout(15000) 
+        });
 
         if(!response.ok){
             throw new Error(`Произошла ошибка: ${response.status}`);
