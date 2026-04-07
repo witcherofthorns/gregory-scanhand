@@ -1,0 +1,80 @@
+<template>
+    <div class="header">
+        <div class="container wrap-x3 wrap-to-col" id="noselect">
+            <a href="/">
+                <div class="label">
+                    <div id="noevents" class="logo">
+                        <img src="/icon-24.png" />
+                    </div>
+                    <div id="noevents">
+                        <p class="subtitle bold">ScanHand</p>
+                        <p class="caption gray">Хиромантия + AI · без регистрации</p>
+                    </div>
+                </div>
+            </a>
+            <div class="buttons">
+                <NuxtLink v-for="(value, index) in navigation" :to="value.path">
+                    <Button :text="value.name" />
+                </NuxtLink>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { navigation } from '~/constants/navigation';
+import Button from '../ui/Button.vue'
+
+</script>
+
+<style scoped>
+.header{
+    top: 0;
+    left: 0;
+    position: sticky;
+    overflow: hidden;
+    z-index: 1;
+    backdrop-filter: blur(12px);
+    background: rgba(0,0,0,.35);
+    border-bottom: 1px solid var(--color-border);
+}
+.header .container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin: auto;
+}
+.header .label{
+    display: flex;
+    gap: 16px;
+    flex-direction: row;
+}
+.header .label .logo{
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-accent);
+    box-shadow: 0 0 0 3px rgba(216,177,90,.10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header .label .logo img{
+    width: 24px;
+    height: 24px;
+}
+.header .buttons{
+    display: inline-flex;
+    flex-direction: row;
+    gap: 8px;
+}
+@media (max-width: 720px){
+    .header .container{
+        align-items: start;
+    }
+}
+</style>
