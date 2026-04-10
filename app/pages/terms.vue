@@ -1,5 +1,5 @@
 <template>
-    <div class="policy-container wrap-x2 anim-fade-in">
+    <div class="terms-container wrap-x2 anim-fade-in">
         <Panel class="col gap-8" mobile>
             <div class="header">
                 <h2>Условия использования</h2>
@@ -23,13 +23,13 @@ import TextBlock from '~/components/block/TextBlock.vue'
 </script>
 
 <style scoped>
-.policy-container{
+.terms-container{
 	margin: auto;
 	flex-direction: column;
     box-sizing: border-box;
     padding-top: 20px;
 }
-.policy-container .header{
+.terms-container .header{
     display: flex;
     gap: 6px;
     flex-direction: column;

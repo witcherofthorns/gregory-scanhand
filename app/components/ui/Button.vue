@@ -1,7 +1,7 @@
 <template>
     <button :disabled="props.disabled" :class="[props.size, { flex: props.flex }]">
         <img v-if="props.icon" :src="props.icon" class="icon" />
-        <p class="button">{{ props.text }}</p>
+        <p v-if="props.text" class="button">{{ props.text }}</p>
     </button>
 </template>
 
@@ -13,7 +13,7 @@ const props = defineProps({
     },
     flex: Boolean,
     icon: String,
-    text: String,
+    text: [String, Number],
     disabled: Boolean
 })
 </script>

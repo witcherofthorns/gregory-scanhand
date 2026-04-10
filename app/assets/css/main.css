@@ -78,6 +78,11 @@ h3.accent, h4.accent, h5.accent{
     color: var(--color-text-accent);
 }
 
+p.gray, h1.gray, h2.gray,
+h3.gray, h4.gray, h5.gray{
+    color: var(--color-text-gray);
+}
+
 h1{
     
     font-family: var(--font-family-playfair);
@@ -141,10 +146,6 @@ p.subtitle{
     font-family: var(--font-family-inter);
 }
 
-p.gray{
-    color: var(--color-text-gray);
-}
-
 .col{
     display: flex;
     flex-direction: column;
@@ -153,6 +154,10 @@ p.gray{
 .row{
     display: flex;
     flex-direction: row;
+}
+
+.flex-align-center{
+    align-items: center;
 }
 
 .gap-6{

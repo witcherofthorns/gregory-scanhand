@@ -10,7 +10,7 @@
                 <Panel class="col gap-16" padding="small" flex>
                     <p class="caption gray" id="noselect">Фото левой ладони</p>
                     <div class="row gap-6">
-                        <Button size="large" icon="/icons/camera.svg" text="Выбрать фото" @click="onClickButton('left')" flex />
+                        <Button size="large" icon="/icons/camera.svg" text="Выбрать фото" @click="onClickInputButton('left')" flex />
                     </div>
                     <div v-if="fileLeft" class="image-preview" id="noevents">
                         <img :src="fileLeft" />
@@ -26,7 +26,7 @@
                 <Panel class="col gap-16" padding="small" flex>
                     <p class="caption gray" id="noselect">Фото правой ладони</p>
                     <div class="row gap-6">
-                        <Button size="large" icon="/icons/camera.svg" text="Выбрать фото" @click="onClickButton('right')" flex />
+                        <Button size="large" icon="/icons/camera.svg" text="Выбрать фото" @click="onClickInputButton('right')" flex />
                     </div>
                     <div v-if="fileRight" class="image-preview" id="noevents">
                         <img :src="fileRight" />
@@ -106,7 +106,7 @@ async function onChangeInputRight(e){
     reader.readAsDataURL(file);
 }
 
-function onClickButton(side){
+function onClickInputButton(side){
     side == 'left'
     ? inputFileLeft.value.click()
     : inputFileRight.value.click()

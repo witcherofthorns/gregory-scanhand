@@ -1,120 +1,18 @@
 <template>
-    <div class="modal" :class="{ hidden: !props.show }">
-        <div class="modal-overlay" data-close-modal @click="onClose" />
-        <div class="modal-container">
-            <div class="modal-header">
-                <h4 class="modal-title accent">{{ props.title }}</h4>
-                <button class="modal-close-btn" data-close-modal aria-label="Закрыть" @click="onClose">
-                    &times;
-                </button>
-            </div>
-            <div class="modal-content">
-                <slot />
-            </div>
-        </div>
+    <div class="modal" @click.stop>
+        <slot></slot>
     </div>
 </template>
 
-<script setup>
-const emits = defineEmits(['accept', 'close'])
-const props = defineProps({
-    show: Boolean,
-    title: String
-})
-
-function onClose(e){
-    emits('close');
-}
-</script>
-
 <style scoped>
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.modal.hidden {
-    display: none;
-}
-.modal-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
-}
-.modal-container {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background: var(--color-surface-primary-solid);
-    border-radius: 26px;
-    max-width: 520px;
-    width: 90%;
-    max-height: 65vh;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    animation: modalSlideIn 0.3s ease-out;
-    z-index: 10;
+.modal{
+    width: 210px;
     margin: auto;
-}
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-30px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-.modal-header {
-    padding: 26px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.modal-close-btn {
-    background: rgba(255, 255, 255, 0);
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: white;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    transition: all 0.2s;
-    line-height: 1;
-}
-.modal-content {
-    padding: 32px;
-    padding-top: 0px;
-    overflow-y: auto;
-    max-height: calc(85vh - 80px);
-}
-@media (max-width: 640px) {
-    .modal-container {
-        width: 95%;
-        max-width: 100%;
-        max-height: 90vh;
-    }
-    .modal-header {
-        padding: 24px;
-    }
-    .modal-content {
-        padding: 24px;
-        padding-top: 0px;
-    }
+    box-sizing: border-box;
+    min-width: 100px;
+    min-height: 100px;
+    padding: 20px;
+    border-radius: 32px;
+    background-color: var(--color-surface-primary-solid);
 }
 </style>

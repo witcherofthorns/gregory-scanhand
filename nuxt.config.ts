@@ -1,11 +1,13 @@
 export default defineNuxtConfig({
+    modules: ['@pinia/nuxt'],
     compatibilityDate: '2025-07-15',
     devtools: { enabled: true },
     css: [
         '@/assets/css/main.css',
+        '@/assets/css/transactions.css'
     ],
-    app:{
-        head:{
+    app: {
+        head: {
             meta: [
                 { charset: 'utf-8' },
                 { property: 'og:site_name', content: 'ScanHand' },
@@ -22,6 +24,6 @@ export default defineNuxtConfig({
                 { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
                 { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@100..900&&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap' }
             ]
-        }
+        },
     }
 })
