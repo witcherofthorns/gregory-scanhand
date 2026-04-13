@@ -42,11 +42,18 @@
             </div>
             <Panel class="col gap-16" padding="medium">
                 <p class="caption gray" id="noselect">Тема предсказания</p>
-                <Radio :values="predictTheme" id="themeSelector" />
+                <Radio v-model="radioTheme" :values="predictTheme" />
             </Panel>
-            <Panel padding="medium">
-                <Button size="large" text="Получить предсказание" flex primary id="predictBtn" disabled />
-            </Panel>
+            <ClientOnly>
+                <Panel padding="medium">
+                    <Button @click="onButtonClick"
+                        size="large"
+                        text="Получить предсказание"
+                        :disabled="!buttonAvailable"
+                        flex
+                    />
+                </Panel>
+            </ClientOnly>
         </Panel>
         <Panel flex>
             <div class="col gap-6 text-block" style="margin-bottom: 20px;">
@@ -71,6 +78,8 @@
 
 <script setup>
 import { faq } from '~/constants/faq'
+import { useAiStore } from '~/stores/ai'
+import { useModalStore } from '~/stores/modal'
 import { predictTheme } from '~/constants/predict.theme'
 import Label from '~/components/block/Label.vue'
 import Panel from '~/components/block/Panel.vue'
@@ -81,6 +90,9 @@ import Accordion from '~/components/ui/Accordion.vue'
 const { createMetrika } = useYandexMetrika()
 const { imageCompress } = useImageCompressor()
 
+const aiStore = useAiStore()
+const modalStore = useModalStore()
+const radioTheme = ref('')
 const fileLeft = ref(null)
 const fileRight = ref(null)
 const inputFileLeft = ref(null)
@@ -111,6 +123,25 @@ function onClickInputButton(side){
     ? inputFileLeft.value.click()
     : inputFileRight.value.click()
 }
+
+async function base64ToFile(base64String, fileName) {
+    const res = await fetch(base64String);
+    const blob = await res.blob();
+    return new File([blob], fileName, { type: blob.type });
+}
+
+async function onButtonClick(e){
+    modalStore.open('result', { skipable: false });
+    aiStore.request(
+        await base64ToFile(fileLeft.value, 'left'),
+        await base64ToFile(fileRight.value, 'right'),
+        radioTheme.value
+    );
+}
+
+const buttonAvailable = computed(() => {
+    return (fileLeft.value && fileRight.value) && radioTheme.value != '';
+});
 
 onMounted(()=>{
     import.meta.env.PROD

@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { v4 as uuidv4 } from 'uuid'
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 export const useUserStore = defineStore('user', {
     state: () => ({
         id: '',
@@ -8,7 +10,7 @@ export const useUserStore = defineStore('user', {
         new: false,
         balance: 0,
         new: false,
-        loading: false
+        loading: false,
     }),
     actions: {
         getFingerprint(){
@@ -31,7 +33,7 @@ export const useUserStore = defineStore('user', {
                 localStorage.setItem('userSalt', salt);
             }
 
-            // Хешируем для консистентности
+            // hashing
             return btoa(components + salt).replace(/[^a-zA-Z0-9]/g, '');
         },
         getDevice(){

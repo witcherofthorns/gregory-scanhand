@@ -104,7 +104,7 @@ watch(modalCurrent, (newModal, oldModal) => {
     top: 0;
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     overflow: hidden;
     z-index: 2;
 }
@@ -113,7 +113,8 @@ watch(modalCurrent, (newModal, oldModal) => {
     height: 100%;
     position: absolute;
     z-index: -1;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
 }
 </style>
 

@@ -4,7 +4,7 @@
             <h1 class="number-current" :class="{ accent: props.current > 0, gray: props.current == 0 }">{{ props.current }}</h1>
             <div class="info">
                 <p class="subtitle bold">Ваш баланс</p>
-                <p class="gray">Кредиты позволяют вам делать предсказания</p>
+                <p class="gray">Кредиты позволяют вам делать предсказания. Пополнение происходит не моментально, ожидайте если вы уже оплатили</p>
             </div>
         </div>
         <div class="col gap-8">
@@ -13,7 +13,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                <Button :text="`Перейти к оплате`" size="large" flex />
+                <Button text="Перейти к оплате" size="large" flex />
             </a>
             <Button
                 :text="`Пополнить за ${props.price}Р`"
@@ -37,7 +37,7 @@ const props = defineProps({
     current: Number,
     price: {
         type: Number,
-        default: 100
+        default: 150
     }
 });
 
@@ -71,7 +71,7 @@ async function onClickPayment(e){
 }
 .payment .info{
     display: flex;
-    gap: 6px;
+    gap: 20px;
     flex-direction: column;
     text-align: center;
 }

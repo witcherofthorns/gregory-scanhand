@@ -1,9 +1,8 @@
 <template>
-    <div class="radio-group" :id="id">
-        <label v-for="(data, index) in values" :key="index">
+    <div class="radio-group">
+        <label v-for="(data, index) in props.values" :key="index">
             <input type="radio" name="theme"
-                :value="data.value"
-                :checked="modelValue === data.value"
+                :checked="model === data.value"
                 @change="updateValue(data.value)"
             />
             <span id="noselect">{{ data.label }}</span>
@@ -12,26 +11,19 @@
 </template>
 
 <script setup>
-defineProps({
-    id: {
-        type: String,
-        required: true
-    },
+const emit = defineEmits(['change'])
+const model = defineModel()
+const props = defineProps({
     values: {
         type: Array,
         required: true,
         default: () => []
-    },
-    modelValue: {
-        type: [String, Number],
-        default: null
     }
 })
 
-const emit = defineEmits(['update:modelValue'])
-
 const updateValue = (value) => {
-    emit('update:modelValue', value)
+    model.value = value;
+    emit('change')
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    <button :disabled="props.disabled" :class="[props.size, { flex: props.flex }]">
+    <button :disabled="props.disabled" :class="[props.size, { flex: props.flex, icon: props.icon && !props.text }]">
         <img v-if="props.icon" :src="props.icon" class="icon" />
         <p v-if="props.text" class="button">{{ props.text }}</p>
     </button>

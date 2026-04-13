@@ -9,6 +9,7 @@ export const usePaymentStore = defineStore('payment', {
             status: 'none',
             link: null
         },
+        timeout: null,
         checking: false
     }),
     actions: {
@@ -18,6 +19,11 @@ export const usePaymentStore = defineStore('payment', {
         },
         async create(){
             const userStore = useUserStore();
+
+            // reset by default
+            clearTimeout(this.current);
+            this.current = null;
+            this.timeout = null;
 
             // if user not authorized
             if(!userStore.authorized){
@@ -44,6 +50,12 @@ export const usePaymentStore = defineStore('payment', {
                 status: data.status,
                 link: data.link
             }
+
+            // timeout
+            this.timeout = setTimeout(() => {
+                this.current = null
+            }, 60000)
+
             return true;
         },
         async check(){
@@ -67,10 +79,12 @@ export const usePaymentStore = defineStore('payment', {
             })
 
             if(!response.ok){
+                this.checking = false;
                 return false
             }
 
             if(response.status == 204){
+                this.checking = false;
                 return true;
             }
 
@@ -83,7 +97,7 @@ export const usePaymentStore = defineStore('payment', {
                         User: userStore.id
                     }
                 })
-                console.log(`payment: check ${data[i].paymentId}`)
+                // console.log(`payment: check ${data[i].paymentId}`)
                 await delay(1000);
             }
 

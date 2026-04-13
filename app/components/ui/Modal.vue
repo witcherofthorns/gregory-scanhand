@@ -15,4 +15,9 @@
     border-radius: 32px;
     background-color: var(--color-surface-primary-solid);
 }
+@media screen and (max-width: 480px) {
+    .modal{
+        min-width: 92%;
+    }
+}
 </style>
