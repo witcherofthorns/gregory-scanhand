@@ -27,7 +27,7 @@ export const useAiStore = defineStore('ai', {
             this.loading = true;
 
             // new request
-            const response = await fetch('http://localhost:3100/api/request', {
+            const response = await fetch('/api/request', {
                 method: 'POST',
                 body: formData,
                 headers: {

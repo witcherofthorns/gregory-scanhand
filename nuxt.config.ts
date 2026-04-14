@@ -2,6 +2,15 @@ export default defineNuxtConfig({
     modules: ['@pinia/nuxt'],
     compatibilityDate: '2025-07-15',
     devtools: { enabled: true },
+    nitro: {
+        devProxy: {
+            '/api': {
+                target: 'http://localhost:3100/api', // local backend URL
+                changeOrigin: true,
+                prependPath: true,
+            }
+        }
+    },
     css: [
         '@/assets/css/main.css',
         '@/assets/css/transactions.css'

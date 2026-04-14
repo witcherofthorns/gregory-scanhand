@@ -118,7 +118,7 @@ export const useUserStore = defineStore('user', {
             }
 
             // new registrate
-            const response = await fetch('http://localhost:3100/api/auth', {
+            const response = await fetch('/api/auth', {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {
@@ -138,7 +138,7 @@ export const useUserStore = defineStore('user', {
             if(!userId) return null;
 
             // fetch user profile data
-            const response = await fetch('http://localhost:3100/api/user', {
+            const response = await fetch('/api/user', {
                 method: 'GET',
                 headers: {
                     User: userId

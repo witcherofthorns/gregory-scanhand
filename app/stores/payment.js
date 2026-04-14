@@ -31,7 +31,7 @@ export const usePaymentStore = defineStore('payment', {
             }
 
             // create payment
-            const response = await fetch('http://localhost:3100/api/payment', {
+            const response = await fetch('/api/payment', {
                 method: 'POST',
                 headers: {
                     User: userStore.id
@@ -71,7 +71,7 @@ export const usePaymentStore = defineStore('payment', {
 
             this.checking = true;
 
-            const response = await fetch('http://localhost:3100/api/payment/waits', {
+            const response = await fetch('/api/payment/waits', {
                 method: 'GET',
                 headers: {
                     User: userStore.id
@@ -91,7 +91,7 @@ export const usePaymentStore = defineStore('payment', {
             const data = await response.json();
 
             for(let i = 0; i < data.length; i++){
-                const payment =  await fetch(`http://localhost:3100/api/payment/status/${data[i].paymentId}`, {
+                const payment =  await fetch(`/api/payment/status/${data[i].paymentId}`, {
                     method: 'GET',
                     headers: {
                         User: userStore.id
