@@ -2,8 +2,24 @@
     <div ref="modalsDiv" id="modals" @click="closeBackdrop" style="display: none;">
         <div ref="modalsBackdrop" class="backdrop" />
         <Transition name="t-fade-slide">
+            <ModalText
+                v-if="modalCurrent?.type === 'text'"
+                v-bind="modalCurrent.data"
+                v-model="modalCurrent.data.modelValue"
+                @accept="acceptCallback"
+                @cancel="cancelCallback"
+                @close="closeCallback"
+            />
             <ModalPayment
-                v-if="modalCurrent?.type === 'payment'"
+                v-else-if="modalCurrent?.type === 'payment'"
+                v-bind="modalCurrent.data"
+                v-model="modalCurrent.data.modelValue"
+                @accept="acceptCallback"
+                @cancel="cancelCallback"
+                @close="closeCallback"
+            />
+            <ModalReshot
+                v-else-if="modalCurrent?.type === 'reshot'"
                 v-bind="modalCurrent.data"
                 v-model="modalCurrent.data.modelValue"
                 @accept="acceptCallback"
@@ -25,7 +41,9 @@
 <script setup>
 import { watch, computed, onMounted, ref } from 'vue';
 import { useModalStore } from '~/stores/modal';
+import ModalText from '../modals/ModalText.vue';
 import ModalPayment from '../modals/ModalPayment.vue';
+import ModalReshot from '../modals/ModalReshot.vue';
 import ModalResult from '../modals/ModalResult.vue';
 
 const modalStore = useModalStore();

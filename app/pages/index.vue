@@ -124,17 +124,10 @@ function onClickInputButton(side){
     : inputFileRight.value.click()
 }
 
-async function base64ToFile(base64String, fileName) {
-    const res = await fetch(base64String);
-    const blob = await res.blob();
-    return new File([blob], fileName, { type: blob.type });
-}
-
 async function onButtonClick(e){
-    modalStore.open('result', { skipable: false });
     aiStore.request(
-        await base64ToFile(fileLeft.value, 'left'),
-        await base64ToFile(fileRight.value, 'right'),
+        fileLeft.value,
+        fileRight.value,
         radioTheme.value
     );
 }

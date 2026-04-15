@@ -47,8 +47,8 @@ export const useImageCompressor = () => {
         if (!file) return null;
 
         const info = await getImageInfo(file);
-        const newWidth = Math.floor(info.width / 1.4);
-        const newHeight = Math.floor(info.height / 1.4);
+        const newWidth = Math.floor(info.width / 1.6);
+        const newHeight = Math.floor(info.height / 1.6);
 
         return await compressorImage(file, {
             quality: 0.6,

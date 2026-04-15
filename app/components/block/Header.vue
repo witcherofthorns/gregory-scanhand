@@ -1,17 +1,15 @@
 <template>
     <div class="header">
         <div class="container wrap-x3 wrap-to-col" id="noselect">
-            <a href="/">
-                <div class="label">
-                    <div id="noevents" class="logo">
-                        <img src="/icon-24.png" />
-                    </div>
-                    <div id="noevents">
-                        <p class="subtitle bold">ScanHand</p>
-                        <p class="caption gray">Хиромантия + AI · без регистрации</p>
-                    </div>
+            <div class="label">
+                <div id="noevents" class="logo">
+                    <img src="/icon-24.png" />
                 </div>
-            </a>
+                <div id="noevents">
+                    <p class="subtitle bold">ScanHand</p>
+                    <p class="caption gray">Хиромантия + AI · без регистрации</p>
+                </div>
+            </div>
             <div class="buttons">
                 <slot name="buttons" />
                 <NuxtLink v-for="(value, index) in navigation" :to="value.path">
