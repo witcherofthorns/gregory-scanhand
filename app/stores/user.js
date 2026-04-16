@@ -76,7 +76,10 @@ export const useUserStore = defineStore('user', {
 
             // failed user fetch data
             if(!user){
+                localStorage.removeItem('userSalt')
+                localStorage.removeItem('userId')
                 console.warn('user: failed fetch data!');
+                console.warn('user: reset');
                 return false;
             }
 

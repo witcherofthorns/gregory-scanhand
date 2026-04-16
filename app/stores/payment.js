@@ -17,7 +17,7 @@ export const usePaymentStore = defineStore('payment', {
             this.current = null;
             this.checking = false;
         },
-        async create(){
+        async create(amount){
             const userStore = useUserStore();
 
             // reset by default
@@ -31,7 +31,7 @@ export const usePaymentStore = defineStore('payment', {
             }
 
             // create payment
-            const response = await fetch('/api/payment', {
+            const response = await fetch('/api/payment?amount=' + amount, {
                 method: 'POST',
                 headers: {
                     User: userStore.id
@@ -51,10 +51,10 @@ export const usePaymentStore = defineStore('payment', {
                 link: data.link
             }
 
-            // timeout
+            // timeout for reset current session
             this.timeout = setTimeout(() => {
                 this.current = null
-            }, 60000)
+            }, 30000)
 
             return true;
         },
@@ -102,6 +102,16 @@ export const usePaymentStore = defineStore('payment', {
             }
 
             this.checking = false;
+        },
+        modalOpen(){
+            const userStore = useUserStore()
+            const modalStore = useModalStore()
+
+            modalStore.open('payment', {
+                skipable: true,
+                current: userStore.balance,
+                prices:[50, 100, 200]
+            });
         }
     }
 })

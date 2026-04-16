@@ -15,10 +15,10 @@
             >
                 <Button text="Перейти к оплате" size="large" flex />
             </a>
-            <Button
-                :text="`Пополнить за ${props.price}Р`"
-                :disabled="paymentStore.current"
-                @click="onClickPayment"
+            <Button v-for="price in props.prices"
+                :text="`Пополнить за ${price}Р`"
+                :disabled="paymentStore.current != null"
+                @click="onClickPayment(price)"
                 size="large"
                 flex
             />
@@ -35,17 +35,17 @@ const paymentStore = usePaymentStore();
 const emits = defineEmits(['update:modelValue', 'close', 'changed']);
 const props = defineProps({
     current: Number,
-    price: {
-        type: Number,
-        default: 150
+    prices: {
+        type: Array,
+        default: []
     }
 });
 
-async function onClickPayment(e){
+async function onClickPayment(amount){
     if(paymentStore.current) return;
 
     // payment create
-    const result = await paymentStore.create();
+    const result = await paymentStore.create(amount);
     if(!result){
         return;
     }

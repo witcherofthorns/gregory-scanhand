@@ -18,14 +18,6 @@
                 @cancel="cancelCallback"
                 @close="closeCallback"
             />
-            <ModalReshot
-                v-else-if="modalCurrent?.type === 'reshot'"
-                v-bind="modalCurrent.data"
-                v-model="modalCurrent.data.modelValue"
-                @accept="acceptCallback"
-                @cancel="cancelCallback"
-                @close="closeCallback"
-            />
             <ModalResult
                 v-else-if="modalCurrent?.type === 'result'"
                 v-bind="modalCurrent.data"
@@ -43,7 +35,6 @@ import { watch, computed, onMounted, ref } from 'vue';
 import { useModalStore } from '~/stores/modal';
 import ModalText from '../modals/ModalText.vue';
 import ModalPayment from '../modals/ModalPayment.vue';
-import ModalReshot from '../modals/ModalReshot.vue';
 import ModalResult from '../modals/ModalResult.vue';
 
 const modalStore = useModalStore();

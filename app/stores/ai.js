@@ -5,7 +5,8 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 export const useAiStore = defineStore('ai', {
     state: () => ({
         loading: false,
-        result: null
+        result: null,
+        resultId: null
     }),
     actions: {
         base64ToBlob(base64, mimeType) {
@@ -46,6 +47,27 @@ export const useAiStore = defineStore('ai', {
             if(!data){
                 this.result = null
                 return false
+            }
+
+            // check current task id
+            if(data.task && this.resultId){
+                if(this.resultId == data.task){
+                    this.result = data
+                    this.resultId = null
+
+                    // try open modal
+                    this.modalOpen();
+                    return true
+                }
+
+                this.result = null
+                return true
+            }
+
+            // if waiting current request/task id
+            if(this.resultId){
+                this.result = null
+                return true
             }
 
             this.result = data
@@ -143,6 +165,10 @@ export const useAiStore = defineStore('ai', {
                         buttonCloseText: 'Хорошо'
                     })
 
+                    // set wait id
+                    // that task id
+                    this.resultId = id;
+
                     return true;
                 }
             
@@ -151,6 +177,30 @@ export const useAiStore = defineStore('ai', {
             catch(error){
                 console.log('request: failed send images: ', error)
                 return false;
+            }
+        },
+        modalOpen(){
+            const modalStore = useModalStore()
+
+            if(this.result.status != "completed") return
+
+            // status ok
+            if(this.result.result.status == "ok"){
+                modalStore.open('result', {
+                    skipable: false,
+                    content: this.result.result.content
+                });
+            }
+            
+            // status reshot
+            if(this.result.result.status == "reshot"){
+                modalStore.open('text', {
+                    skipable: false,
+                    title: 'Фото неподходит',
+                    text: 'К сожалению, мы вынуждены попросить вас сделать фото повторно, так как ваши отпрвленные фото плохого качества или размыты',
+                    buttonClose: true,
+                    buttonCloseText: 'Закрыть'
+                });
             }
         }
     }
