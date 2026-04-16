@@ -1,0 +1,50 @@
+/* fade default router */
+.t-fade-router-enter-from,
+.t-fade-router-leave-to {
+    opacity: 0;
+}
+.t-fade-router-enter-active {
+    transition: opacity 0.2s ease-out;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    pointer-events: none;
+}
+.t-fade-router-leave-active {
+    transition: opacity 0.2s ease-out;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    pointer-events: none;
+}
+.t-fade-router-enter-to,
+.t-fade-router-leave-from {
+    opacity: 1;
+}
+
+/* fade slide */
+.t-fade-slide-enter-active {
+    transition: all 0.3s ease-out;
+}
+.t-fade-slide-leave-active {
+    transition: all 0.3s ease-out;
+}
+.t-fade-slide-enter-from,
+.t-fade-slide-leave-to {
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+/* for bottom-sheet */
+.t-sheet-enter-active {
+    transition: transform 0.3s ease-in-out;
+}
+.t-sheet-leave-active {
+    transition: transform 0.3s ease-out;
+}
+.t-sheet-enter-from,
+.t-sheet-leave-to {
+    transform: translateY(100%);
+}

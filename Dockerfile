@@ -1,19 +1,27 @@
-FROM node:22.21.1-alpine AS runtime
+# stage 1: build
+FROM node:22-alpine AS builder
+
 WORKDIR /app
 
-ARG SKANHAND_OPENAI_API_KEY
-ARG SKANHAND_OPENAI_URL
-ARG SKANHAND_BLOG_URL
-ENV SKANHAND_OPENAI_API_KEY=$SKANHAND_OPENAI_API_KEY
-ENV SKANHAND_OPENAI_URL=$SKANHAND_OPENAI_URL
-ENV SKANHAND_BLOG_URL=$SKANHAND_BLOG_URL
+RUN corepack enable
+
+COPY package.json pnpm-lock.yaml* npm-shrinkwrap.json* yarn.lock* ./
+RUN pnpm install || npm install || yarn install
 
 COPY . .
-
-RUN npm install
 RUN npm run build
 
+# stage 2: runner
+FROM node:22-alpine AS runner
+
+WORKDIR /app
+
+COPY --from=builder /app/.output ./.output
+
+ENV NODE_ENV=production
 ENV HOST=0.0.0.0
-ENV PORT=4321
-EXPOSE 4321
-CMD ["node", "./dist/server/entry.mjs"]
+ENV PORT=3000
+
+EXPOSE 3000
+
+CMD ["node", ".output/server/index.mjs"]
