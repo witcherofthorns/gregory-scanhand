@@ -13,7 +13,7 @@
             <div class="buttons">
                 <slot name="buttons" />
                 <NuxtLink v-for="(value, index) in navigation" :to="value.path">
-                    <Button :text="value.name" />
+                    <Button v-if="value.active" :text="value.name" />
                 </NuxtLink>
             </div>
         </div>

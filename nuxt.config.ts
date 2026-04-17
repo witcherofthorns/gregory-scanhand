@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     ],
     app: {
         head: {
+            title: 'ScanHand — онлайн хиромантия по фото',
             meta: [
                 { charset: 'utf-8' },
                 { property: 'og:site_name', content: 'ScanHand' },
