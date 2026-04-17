@@ -17,7 +17,7 @@
 }
 @media screen and (max-width: 480px) {
     .modal{
-        min-width: 92%;
+        min-width: 90%;
     }
 }
 </style>

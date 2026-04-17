@@ -8,7 +8,7 @@
             </div>
             <div class="wrap-to-col gap-12">
                 <Panel class="col gap-16" padding="small" flex>
-                    <p class="caption gray" id="noselect">Фото левой ладони</p>
+                    <p class="caption gray" id="noselect" style="margin-left: 4px;">Фото левой ладони</p>
                     <div class="row gap-6">
                         <Button size="large" icon="/icons/camera.svg" text="Выбрать фото" @click="onClickInputButton('left')" flex />
                     </div>
@@ -24,7 +24,7 @@
                     />
                 </Panel>
                 <Panel class="col gap-16" padding="small" flex>
-                    <p class="caption gray" id="noselect">Фото правой ладони</p>
+                    <p class="caption gray" id="noselect" style="margin-left: 4px;">Фото правой ладони</p>
                     <div class="row gap-6">
                         <Button size="large" icon="/icons/camera.svg" text="Выбрать фото" @click="onClickInputButton('right')" flex />
                     </div>
@@ -45,14 +45,12 @@
                 <Radio v-model="radioTheme" :values="predictTheme" />
             </Panel>
             <ClientOnly>
-                <Panel padding="medium">
-                    <Button @click="onButtonClick"
-                        size="large"
-                        text="Получить предсказание"
-                        :disabled="!buttonAvailable"
-                        flex
-                    />
-                </Panel>
+                <Button @click="onButtonClick"
+                    size="large"
+                    text="Получить предсказание (50 кред)"
+                    :disabled="!buttonAvailable"
+                    style="min-height: 56px; margin-top: 6px;"
+                />
             </ClientOnly>
         </Panel>
         <Panel flex>
