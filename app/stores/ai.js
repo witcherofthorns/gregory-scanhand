@@ -98,17 +98,13 @@ export const useAiStore = defineStore('ai', {
                     const { status } = await response.json();
 
                     // status no credits
+                    // open payment modal
                     if(status == "no credits"){
-                        modalStore.open('text', {
-                            skipable: true,
-                            title: 'Нет кредитов',
-                            text: 'Кажется, у вас закончились кредиты. Для продолжения использования сервиса, пополните ваш счёт',
-                            buttonClose: true,
-                            buttonCloseText: 'Понятно'
-                        })
+                        const paymentStore = usePaymentStore();
+                        paymentStore.modalOpen();
                     }
 
-                    // status no credits
+                    // status processing
                     if(status == "processing"){
                         modalStore.open('text', {
                             skipable: true,
